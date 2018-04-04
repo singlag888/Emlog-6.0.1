@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+<title>EMLOG安装程序</title>
+<link href="../admin/views/plugins/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="../admin/views/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="./install/css/install.css">
+<script src="../admin/views/plugins/jquery.1.12.4.min.js"></script>
+<script src="../admin/views/plugins/bootstrap-3.3.0/js/bootstrap.min.js"></script>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="./install/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="./install/js/respond.min.js"></script>
+<![endif]-->
+<script>
+function testClick(){
+    if($('.yes').length !=7){
+        alert('您的配置或权限不符合要求');
+    }else{
+        location.href='../install.php?c=create';
+    }
+}
+</script>
+</head>
+<body>
+<div id="nav">
+    <div class="inside">
+        <p class="name">Emlog<span>安装向导</span></p>
+        <ul class="schedule active">
+            <li class="number">2</li>
+            <li class="word">系统检测</li>
+        </ul>
+    </div>
+</div>
+<div id="out">
+    <div class="inside">
+        <div class="box test">
+        <div class="row">
+     <div class="col-xs-12 col-sm-6 col-md-8 col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+<i class="zmdi zmdi-check-circle"></i> 系统检测
+                </div>
+           <div class="panel-body">
+            <h2>环境监测</h2>
+            <table class="table table-border">
+                <tr>
+                    <th width="25%">坏境</th>
+                    <th width="25%">最低配置</th>
+                    <th width="25%">当前配置</th>
+                    <th width="25%">是否符合</th>
+                </tr>
+                <tr>
+                    <td>操作系统</td>
+                    <td>不限</td>
+                    <td><?php echo php_uname('s'); ?></td>
+                    <td class="yes">√</td>
+                </tr>
+                <tr>
+                    <td>php版本</td>
+                    <td>&gt;5.0</td>
+                    <td><?php echo PHP_VERSION ?></td>
+                    <?php $php_version=explode('.', PHP_VERSION); ?>
+                    <td class="<?php if(($php_version['0']>=7) || ($php_version['0']>=5 && $php_version['1']>=0))echo 'yes'; ?>">
+                        <?php if (($php_version['0']>=7) || ($php_version['0']>=5 && $php_version['1']>=0)): ?>
+                            √
+                        <?php else: ?>
+                            ×
+                        <?php endif ?>
+                    </td>
+                </tr>
+            </table>
+            <h2>目录权限</h2>
+            <table class="table table-border">
+                <tr>
+                    <th width="25%">坏境</th>
+                    <th width="25%">最低配置</th>
+                    <th width="25%">当前配置</th>
+                    <th width="25%">是否符合</th>
+                </tr>
+                <tr>
+                    <td>./</td>
+                    <td>可写</td>
+                    <td>
+                        <?php if (is_writable('./')): ?>
+                            可写
+                        <?php else: ?>
+                            不可写
+                        <?php endif ?>
+                    </td>
+                    <td class="<?php if(is_writable('./'))echo 'yes'; ?>">
+                        <?php if (is_writable('./')): ?>
+                            √
+                        <?php else: ?>
+                            ×
+                        <?php endif ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>./avatar</td>
+                    <td>可写</td>
+                    <td>
+                        <?php if (is_writable('./avatar')): ?>
+                            可写
+                        <?php else: ?>
+                            不可写
+                        <?php endif ?>
+                    </td>
+                    <td class="<?php if(is_writable('./avatar'))echo 'yes'; ?>">
+                        <?php if (is_writable('./avatar')): ?>
+                            √
+                        <?php else: ?>
+                            ×
+                        <?php endif ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>./content/cache</td>
+                    <td>可写</td>
+                    <td>
+                        <?php if (is_writable('./content/cache')): ?>
+                            可写
+                        <?php else: ?>
+                            不可写
+                        <?php endif ?>
+                    </td>
+                    <td class="<?php if(is_writable('./content/cache'))echo 'yes'; ?>">
+                        <?php if (is_writable('./content/cache')): ?>
+                            √
+                        <?php else: ?>
+                            ×
+                        <?php endif ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>./content/uploadfile </td>
+                    <td>可写</td>
+                    <td>
+                        <?php if (is_writable('./content/uploadfile')): ?>
+                            可写
+                        <?php else: ?>
+                            不可写
+                        <?php endif ?>
+                    </td>
+                    <td class="<?php if(is_writable('./content/uploadfile'))echo 'yes'; ?>">
+                        <?php if (is_writable('./content/uploadfile')): ?>
+                            √
+                        <?php else: ?>
+                            ×
+                        <?php endif ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>./install</td>
+                    <td>可写</td>
+                    <td>
+                        <?php if (is_writable('./install')): ?>
+                            可写
+                        <?php else: ?>
+                            不可写
+                        <?php endif ?>
+                    </td>
+                    <td class="<?php if(is_writable('./install'))echo 'yes'; ?>">
+                        <?php if (is_writable('./install')): ?>
+                            √
+                        <?php else: ?>
+                            ×
+                        <?php endif ?>
+                    </td>
+                </tr>
+            </table>
+            <p class="agree">
+                <a class="btn btn-primary" href="./install.php?c=agreement">上一步</a>
+                <a class="btn btn-success" href="javascript:;" onclick="testClick()">下一步</a>
+            </p>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
